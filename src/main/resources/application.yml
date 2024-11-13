@@ -19,6 +19,14 @@ spring:
     activate:
       on-profile: development
 
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:cert/keystore.p12
+    key-store-type: PKCS12
+    key-store-password: password
+
 ---
 ##########################
 ### Docker environment ###
@@ -27,6 +35,14 @@ spring:
   config:
     activate:
       on-profile: docker
+
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:cert/keystore.p12
+    key-store-type: PKCS12
+    key-store-password: password
 
 ---
 ##############################

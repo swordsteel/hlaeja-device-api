@@ -22,3 +22,15 @@ dependencies {
 }
 
 group = "ltd.hlaeja"
+
+tasks {
+    named("processResources") {
+        dependsOn("copyKeystore")
+    }
+    register<Copy>("copyKeystore") {
+        group = "hlaeja"
+        from("cert/keystore.p12")
+        into("${layout.buildDirectory.get()}/resources/main/cert")
+        onlyIf { file("cert/keystore.p12").exists() }
+    }
+}
