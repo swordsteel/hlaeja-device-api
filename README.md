@@ -13,6 +13,7 @@ Classes and endpoints, to shape and to steer, Devices and sensors, their purpose
 | server.ssl.key-store-type     | *        | HTTP Cert Type          |
 | server.ssl.key-store-password | **       | HTTP Cert Pass          |
 | jwt.public-key                | *        | JWT public key          |
+| device-registry.url           | *        | Device Register URL     |
 
 Required: * can be stored as text, and ** need to be stored as secret.
 
