@@ -29,6 +29,11 @@
       "name": "device-registry.url",
       "type": "java.lang.String",
       "description": "Url for device registry service."
+    },
+    {
+      "name": "device-data.url",
+      "type": "java.lang.String",
+      "description": "Url for device data service."
     }
   ]
 }

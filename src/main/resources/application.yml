@@ -33,6 +33,9 @@ server:
 device-registry:
   url: http://localhost:9010
 
+device-data:
+  url: http://localhost:9020
+
 ---
 ##########################
 ### Docker environment ###
@@ -52,6 +55,9 @@ server:
 
 device-registry:
   url: http://DeviceRegistry:8080
+
+device-data:
+  url: http://DeviceData:8080
 
 ---
 ##############################
