@@ -1,11 +1,15 @@
 package ltd.hlaeja
 
+import ltd.hlaeja.property.DeviceRegistryProperty
 import ltd.hlaeja.property.JwtProperty
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 
-@EnableConfigurationProperties(JwtProperty::class)
+@EnableConfigurationProperties(
+    DeviceRegistryProperty::class,
+    JwtProperty::class,
+)
 @SpringBootApplication
 class Application
 
