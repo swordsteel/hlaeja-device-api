@@ -1,0 +1,24 @@
+### get measurement
+GET {{hostname}}/measurement
+Content-Type: application/json
+Identity: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+### add measurement for all
+POST {{hostname}}/measurement
+Content-Type: application/json
+Identity: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+{
+  "button0": 0,
+  "button1": 1,
+  "button2": 0
+}
+
+### add measurement for one
+POST {{hostname}}/measurement
+Content-Type: application/json
+Identity: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+{
+  "button0": 0
+}
