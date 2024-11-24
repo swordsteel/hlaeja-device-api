@@ -8,6 +8,7 @@ plugins {
 
 dependencies {
     implementation(hlaeja.jjwt.api)
+    implementation(hlaeja.kotlin.logging)
     implementation(hlaeja.kotlin.reflect)
     implementation(hlaeja.kotlinx.coroutines)
     implementation(hlaeja.org.springframework.springboot.actuator.starter)
