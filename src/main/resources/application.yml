@@ -10,6 +10,9 @@ spring:
         name: "%APP_BUILD_OS_NAME%"
         version: "%APP_BUILD_OS_VERSION%"
 
+jwt:
+  public-key: cert/public_key.pem
+
 ---
 ###############################
 ### Development environment ###

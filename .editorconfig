@@ -14,7 +14,7 @@ max_line_length = 1024
 indent_size = 2
 tab_width = 2
 
-[*.cer]
+[*.{cer,pem}]
 max_line_length = 64
 insert_final_newline = false
 

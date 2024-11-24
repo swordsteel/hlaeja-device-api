@@ -12,6 +12,7 @@ Classes and endpoints, to shape and to steer, Devices and sensors, their purpose
 | server.ssl.key-store          | *        | HTTP Keystore           |
 | server.ssl.key-store-type     | *        | HTTP Cert Type          |
 | server.ssl.key-store-password | **       | HTTP Cert Pass          |
+| jwt.public-key                | *        | JWT public key          |
 
 Required: * can be stored as text, and ** need to be stored as secret.
 
@@ -34,13 +35,17 @@ Run `release.sh` script from `master` branch.
 
 3. Generate Keystores
     ```shell
-    keytool -genkeypair -alias device-api -keyalg RSA -keysize 2048 -validity 3650 -dname "CN=deviceapi" -keypass password -keystore ./certs/keystore.p12 -storetype PKCS12 -storepass password
+    keytool -genkeypair -alias device-api -keyalg RSA -keysize 2048 -validity 3650 -dname "CN=deviceapi" -keypass password -keystore ./cert/keystore.p12 -storetype PKCS12 -storepass password
     ```
 
 4. Export the public certificate
     ```shell
-    keytool -export -alias device-api -keystore ./certs/keystore.p12 -storepass password -file ./certs/device-api.cer -rfc
+    keytool -export -alias device-api -keystore ./cert/keystore.p12 -storepass password -file ./cert/device-api.cer -rfc
     ```
+
+### Public RSA Key
+
+To validate devices, copy file named `public_key.pem` from `./cert` generated for local development in **Hlæja Device Register** in to `./cert`.
 
 ### Global gradle properties
 

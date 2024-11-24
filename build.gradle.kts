@@ -7,10 +7,14 @@ plugins {
 }
 
 dependencies {
+    implementation(hlaeja.jjwt.api)
     implementation(hlaeja.kotlin.reflect)
     implementation(hlaeja.kotlinx.coroutines)
     implementation(hlaeja.org.springframework.springboot.actuator.starter)
     implementation(hlaeja.org.springframework.springboot.webflux.starter)
+
+    runtimeOnly(hlaeja.jjwt.impl)
+    runtimeOnly(hlaeja.jjwt.jackson)
 
     testImplementation(hlaeja.io.mockk)
     testImplementation(hlaeja.io.projectreactor.reactor.test)
@@ -25,12 +29,18 @@ group = "ltd.hlaeja"
 
 tasks {
     named("processResources") {
-        dependsOn("copyKeystore")
+        dependsOn("copyKeystore", "copyPublicKey")
     }
     register<Copy>("copyKeystore") {
         group = "hlaeja"
         from("cert/keystore.p12")
         into("${layout.buildDirectory.get()}/resources/main/cert")
         onlyIf { file("cert/keystore.p12").exists() }
+    }
+    register<Copy>("copyPublicKey") {
+        group = "hlaeja"
+        from("cert/public_key.pem")
+        into("${layout.buildDirectory.get()}/resources/main/cert")
+        onlyIf { file("cert/public_key.pem").exists() }
     }
 }
