@@ -4,17 +4,18 @@ Classes and endpoints, to shape and to steer, Devices and sensors, their purpose
 
 ## Properties for deployment
 
-| name                          | required | info                    |
-|-------------------------------|----------|-------------------------|
-| spring.profiles.active        | *        | Spring Boot environment |
-| server.port                   | *        | HTTP port               |
-| server.ssl.enabled            | *        | HTTP Enable SSL         |
-| server.ssl.key-store          | *        | HTTP Keystore           |
-| server.ssl.key-store-type     | *        | HTTP Cert Type          |
-| server.ssl.key-store-password | **       | HTTP Cert Pass          |
-| jwt.public-key                | *        | JWT public key          |
-| device-registry.url           | *        | Device Register URL     |
-| device-data.url               | *        | Device Data URL         |
+| name                          | required | info                     |
+|-------------------------------|----------|--------------------------|
+| spring.profiles.active        | *        | Spring Boot environment  |
+| server.port                   | *        | HTTP port                |
+| server.ssl.enabled            | *        | HTTP Enable SSL          |
+| server.ssl.key-store          | *        | HTTP Keystore            |
+| server.ssl.key-store-type     | *        | HTTP Cert Type           |
+| server.ssl.key-store-password | **       | HTTP Cert Pass           |
+| jwt.public-key                | *        | JWT public key           |
+| device-registry.url           | *        | Device Register URL      |
+| device-data.url               | *        | Device Data URL          |
+| device-configuration.url      | *        | Device Configuration URL |
 
 Required: * can be stored as text, and ** need to be stored as secret.
 
@@ -27,8 +28,8 @@ Run `release.sh` script from `master` branch.
 ### Developer Keystore
 
 1. Open `hosts` file:
-   * On Unix-like systems (Linux, macOS), this directory is typically `/etc/hosts`.
-   * On Windows, this directory is typically `%SystemRoot%\System32\drivers\etc\hosts`.
+  * On Unix-like systems (Linux, macOS), this directory is typically `/etc/hosts`.
+  * On Windows, this directory is typically `%SystemRoot%\System32\drivers\etc\hosts`.
 
 2. Add the following lines to the `hosts` file:
     ```text
@@ -57,8 +58,8 @@ Here's how you can do it:
 
 1. Open or create the `gradle.properties` file in your Gradle user home directory:
 
-    - On Unix-like systems (Linux, macOS), this directory is typically `~/.gradle/`.
-    - On Windows, this directory is typically `C:\Users\<YourUsername>\.gradle\`.
+  - On Unix-like systems (Linux, macOS), this directory is typically `~/.gradle/`.
+  - On Windows, this directory is typically `C:\Users\<YourUsername>\.gradle\`.
 
 2. Add the following lines to the `gradle.properties` file:
     ```properties
