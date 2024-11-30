@@ -1,9 +1,7 @@
 package ltd.hlaeja.controller
 
 import ltd.hlaeja.library.deviceData.MeasurementData
-import ltd.hlaeja.library.deviceRegistry.Identity
 import ltd.hlaeja.service.DeviceDataService
-import ltd.hlaeja.service.DeviceRegistryService
 import ltd.hlaeja.service.JwtService
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,16 +15,15 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/measurement")
 class MeasurementController(
-    private val deviceDataService: DeviceDataService,
-    private val deviceRegistry: DeviceRegistryService,
+    private val dataService: DeviceDataService,
     private val jwtService: JwtService,
 ) {
 
     @GetMapping
     suspend fun getNodeMeasurement(
         @RequestHeader("Identity") identityToken: String,
-    ): Map<String, Number> = extracted(identityToken)
-        .let { deviceDataService.getMeasurement(it.client, it.node).fields }
+    ): Map<String, Number> = jwtService.getIdentity(identityToken)
+        .let { dataService.getMeasurement(it.client, it.node).fields }
 
     @PostMapping
     @ResponseStatus(CREATED)
@@ -34,9 +31,9 @@ class MeasurementController(
         @RequestHeader("Identity") identityToken: String,
         @RequestBody measurement: Map<String, Number>,
     ) {
-        return extracted(identityToken)
+        return jwtService.getIdentity(identityToken)
             .let {
-                deviceDataService.addMeasurement(
+                dataService.addMeasurement(
                     it.client,
                     MeasurementData.Request(
                         mutableMapOf(
@@ -48,9 +45,4 @@ class MeasurementController(
                 )
             }
     }
-
-    private suspend fun extracted(
-        identityToken: String,
-    ): Identity.Response = jwtService.readIdentity(identityToken)
-        .let { deviceRegistry.getIdentityFromDevice(it) }
 }

@@ -1,6 +1,5 @@
 ### get measurement
 GET {{hostname}}/measurement
-Content-Type: application/json
 Identity: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
 ### add measurement for all
