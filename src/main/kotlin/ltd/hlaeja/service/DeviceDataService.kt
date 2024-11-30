@@ -3,7 +3,7 @@ package ltd.hlaeja.service
 import java.util.UUID
 import ltd.hlaeja.library.deviceData.MeasurementData
 import ltd.hlaeja.property.DeviceDataProperty
-import mu.KotlinLogging
+import ltd.hlaeja.util.logCall
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.HttpStatus.REQUEST_TIMEOUT
@@ -12,8 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.awaitBodilessEntity
 import org.springframework.web.reactive.function.client.awaitBodyOrNull
 import org.springframework.web.server.ResponseStatusException
-
-private val log = KotlinLogging.logger {}
 
 @Service
 class DeviceDataService(
@@ -25,8 +23,7 @@ class DeviceDataService(
         client: UUID,
         node: UUID,
     ): MeasurementData.Response = webClient.get()
-        .uri("${deviceDataProperty.url}/client-$client/node-$node")
-        .also { log.debug("{}/client-{}/node-{}", deviceDataProperty.url, client, node) }
+        .uri("${deviceDataProperty.url}/client-$client/node-$node".also(::logCall))
         .retrieve()
         .onStatus(NOT_FOUND::equals) { throw ResponseStatusException(NO_CONTENT) }
         .awaitBodyOrNull<MeasurementData.Response>() ?: throw ResponseStatusException(REQUEST_TIMEOUT)
@@ -35,8 +32,7 @@ class DeviceDataService(
         client: UUID,
         request: MeasurementData.Request,
     ) = webClient.post()
-        .uri("${deviceDataProperty.url}/client-$client")
-        .also { log.debug("{}/client-{}", deviceDataProperty.url, client) }
+        .uri("${deviceDataProperty.url}/client-$client".also(::logCall))
         .bodyValue(request)
         .retrieve()
         .awaitBodilessEntity()
