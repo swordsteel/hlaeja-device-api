@@ -1,6 +1,7 @@
 plugins {
     alias(hlaeja.plugins.kotlin.jvm)
     alias(hlaeja.plugins.kotlin.spring)
+    alias(hlaeja.plugins.ltd.hlaeja.plugin.certificate)
     alias(hlaeja.plugins.ltd.hlaeja.plugin.service)
     alias(hlaeja.plugins.spring.dependency.management)
     alias(hlaeja.plugins.springframework.boot)
@@ -30,20 +31,6 @@ dependencies {
 
 group = "ltd.hlaeja"
 
-tasks {
-    named("processResources") {
-        dependsOn("copyKeystore", "copyPublicKey")
-    }
-    register<Copy>("copyKeystore") {
-        group = "hlaeja"
-        from("cert/keystore.p12")
-        into("${layout.buildDirectory.get()}/resources/main/cert")
-        onlyIf { file("cert/keystore.p12").exists() }
-    }
-    register<Copy>("copyPublicKey") {
-        group = "hlaeja"
-        from("cert/public_key.pem")
-        into("${layout.buildDirectory.get()}/resources/main/cert")
-        onlyIf { file("cert/public_key.pem").exists() }
-    }
+tasks.named("processResources") {
+    dependsOn("copyCertificates")
 }
