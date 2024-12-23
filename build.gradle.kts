@@ -1,3 +1,5 @@
+import com.bmuschko.gradle.docker.tasks.container.DockerCreateContainer
+
 plugins {
     alias(hlaeja.plugins.kotlin.jvm)
     alias(hlaeja.plugins.kotlin.spring)
@@ -13,6 +15,7 @@ dependencies {
     implementation(hlaeja.kotlin.logging)
     implementation(hlaeja.kotlin.reflect)
     implementation(hlaeja.kotlinx.coroutines)
+    implementation(hlaeja.micrometer.registry.influx)
     implementation(hlaeja.library.hlaeja.common.messages)
     implementation(hlaeja.springboot.starter.actuator)
     implementation(hlaeja.springboot.starter.webflux)
@@ -31,6 +34,17 @@ dependencies {
 
 group = "ltd.hlaeja"
 
-tasks.named("processResources") {
-    dependsOn("copyCertificates")
+fun influxDbToken(): String = config.findOrDefault("influxdb.token", "INFLUXDB_TOKEN", "")
+
+tasks {
+    named("containerCreate", DockerCreateContainer::class) {
+        withEnvVar("MANAGEMENT_INFLUX_METRICS_EXPORT_TOKEN", influxDbToken())
+    }
+    withType<ProcessResources> {
+        filesMatching("**/application.yml") { filter { it.replace("%INFLUXDB_TOKEN%", influxDbToken()) } }
+        onlyIf { file("src/main/resources/application.yml").exists() }
+    }
+    named("processResources") {
+        dependsOn("copyCertificates")
+    }
 }

@@ -4,18 +4,25 @@ Classes and endpoints, to shape and to steer, Devices and sensors, their purpose
 
 ## Properties for deployment
 
-| name                          | required | info                     |
-|-------------------------------|----------|--------------------------|
-| spring.profiles.active        | *        | Spring Boot environment  |
-| server.port                   | *        | HTTP port                |
-| server.ssl.enabled            | *        | HTTP Enable SSL          |
-| server.ssl.key-store          | *        | HTTP Keystore            |
-| server.ssl.key-store-type     | *        | HTTP Cert Type           |
-| server.ssl.key-store-password | **       | HTTP Cert Pass           |
-| jwt.public-key                | *        | JWT public key           |
-| device-registry.url           | *        | Device Register URL      |
-| device-data.url               | *        | Device Data URL          |
-| device-configuration.url      | *        | Device Configuration URL |
+| name                                         | required | info                                         |
+|----------------------------------------------|----------|----------------------------------------------|
+| spring.profiles.active                       | *        | Spring Boot environment                      |
+| server.port                                  | *        | HTTP port                                    |
+| server.ssl.enabled                           | *        | HTTP Enable SSL                              |
+| server.ssl.key-store                         | *        | HTTP Keystore                                |
+| server.ssl.key-store-type                    | *        | HTTP Cert Type                               |
+| server.ssl.key-store-password                | **       | HTTP Cert Pass                               |
+| jwt.public-key                               | *        | JWT public key                               |
+| device-registry.url                          | *        | Device Register URL                          |
+| device-data.url                              | *        | Device Data URL                              |
+| device-configuration.url                     | *        | Device Configuration URL                     |
+| management.influx.metrics.export.api-version |          | InfluxDB API version                         |
+| management.influx.metrics.export.enabled     |          | Enable/Disable exporting metrics to InfluxDB |
+| management.influx.metrics.export.bucket      | *        | InfluxDB bucket name                         |
+| management.influx.metrics.export.org         | *        | InfluxDB organization                        |
+| management.influx.metrics.export.token       | **       | InfluxDB token                               |
+| management.influx.metrics.export.uri         | *        | InfluxDB URL                                 |
+| management.metrics.tags.application          | *        | Application instance tag for metrics         |
 
 Required: * can be stored as text, and ** need to be stored as secret.
 
@@ -28,8 +35,8 @@ Run `release.sh` script from `master` branch.
 ### Developer Keystore
 
 1. Open `hosts` file:
-  * On Unix-like systems (Linux, macOS), this directory is typically `/etc/hosts`.
-  * On Windows, this directory is typically `%SystemRoot%\System32\drivers\etc\hosts`.
+    * On Unix-like systems (Linux, macOS), this directory is typically `/etc/hosts`.
+    * On Windows, this directory is typically `%SystemRoot%\System32\drivers\etc\hosts`.
 
 2. Add the following lines to the `hosts` file:
     ```text
