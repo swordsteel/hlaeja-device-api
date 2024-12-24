@@ -9,6 +9,12 @@ spring:
       os:
         name: "%APP_BUILD_OS_NAME%"
         version: "%APP_BUILD_OS_VERSION%"
+  cache:
+    type: redis
+  data:
+    redis:
+      port: 6379
+      database: 1
 
 management:
   endpoints:
@@ -29,6 +35,9 @@ management:
         bucket: hlaeja
         org: hlaeja_ltd
 
+cache:
+  time-to-live: 10
+
 jwt:
   public-key: cert/public_key.pem
 
@@ -40,6 +49,9 @@ spring:
   config:
     activate:
       on-profile: development
+  data:
+    redis:
+      host: localhost
 
 management:
   metrics:
@@ -76,6 +88,9 @@ spring:
   config:
     activate:
       on-profile: docker
+  data:
+    redis:
+      host: Redis
 
 management:
   metrics:

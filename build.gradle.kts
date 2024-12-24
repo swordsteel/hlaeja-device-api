@@ -18,6 +18,8 @@ dependencies {
     implementation(hlaeja.micrometer.registry.influx)
     implementation(hlaeja.library.hlaeja.common.messages)
     implementation(hlaeja.springboot.starter.actuator)
+    implementation(hlaeja.springboot.starter.cache)
+    implementation(hlaeja.springboot.starter.redis)
     implementation(hlaeja.springboot.starter.webflux)
 
     runtimeOnly(hlaeja.jjwt.impl)

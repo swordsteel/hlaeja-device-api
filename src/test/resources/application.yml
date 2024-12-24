@@ -6,3 +6,5 @@ device-data:
   url: http://localhost:9020
 device-configuration:
   url: http://localhost:9030
+cache:
+  time-to-live: 10

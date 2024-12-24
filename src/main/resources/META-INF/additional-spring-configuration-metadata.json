@@ -39,6 +39,11 @@
       "name": "device-configuration.url",
       "type": "java.lang.String",
       "description": "Url for device configuration service."
+    },
+    {
+      "name": "cache.time-to-live",
+      "type": "java.lang.Long",
+      "description": "Cache expiration in minutes."
     }
   ]
 }

@@ -7,6 +7,7 @@ import java.util.UUID
 import ltd.hlaeja.library.deviceRegistry.Identity
 import ltd.hlaeja.property.DeviceRegistryProperty
 import ltd.hlaeja.util.deviceRegistryIdentityDevice
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.http.HttpStatus.SERVICE_UNAVAILABLE
 import org.springframework.stereotype.Service
 import org.springframework.web.ErrorResponseException
@@ -31,6 +32,7 @@ class DeviceRegistryService(
         .description("Number of failed device identity calls")
         .register(meterRegistry)
 
+    @Cacheable(value = ["identity"], key = "#device")
     suspend fun getIdentityFromDevice(
         device: UUID,
     ): Identity.Response = try {
