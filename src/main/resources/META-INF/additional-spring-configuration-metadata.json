@@ -21,11 +21,6 @@
       "description": "Application build os version."
     },
     {
-      "name": "jwt.public-key",
-      "type": "java.lang.String",
-      "description": "Jwt public key file."
-    },
-    {
       "name": "device-registry.url",
       "type": "java.lang.String",
       "description": "Url for device registry service."

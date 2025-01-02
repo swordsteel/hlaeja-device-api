@@ -17,13 +17,11 @@ dependencies {
     implementation(hlaeja.kotlinx.coroutines)
     implementation(hlaeja.micrometer.registry.influx)
     implementation(hlaeja.library.hlaeja.common.messages)
+    implementation(hlaeja.library.hlaeja.jwt)
     implementation(hlaeja.springboot.starter.actuator)
     implementation(hlaeja.springboot.starter.cache)
     implementation(hlaeja.springboot.starter.redis)
     implementation(hlaeja.springboot.starter.webflux)
-
-    runtimeOnly(hlaeja.jjwt.impl)
-    runtimeOnly(hlaeja.jjwt.jackson)
 
     testImplementation(hlaeja.kotlin.test.junit5)
     testImplementation(hlaeja.kotlinx.coroutines.test)

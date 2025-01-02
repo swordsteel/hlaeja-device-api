@@ -1,8 +1,11 @@
 package ltd.hlaeja.controller
 
+import java.util.UUID
+import ltd.hlaeja.jwt.service.PublicJwtService
 import ltd.hlaeja.library.deviceData.MeasurementData
+import ltd.hlaeja.library.deviceRegistry.Identity
 import ltd.hlaeja.service.DeviceDataService
-import ltd.hlaeja.service.JwtService
+import ltd.hlaeja.service.DeviceRegistryService
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,13 +19,14 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/measurement")
 class MeasurementController(
     private val dataService: DeviceDataService,
-    private val jwtService: JwtService,
+    private val deviceRegistry: DeviceRegistryService,
+    private val publicJwtService: PublicJwtService,
 ) {
 
     @GetMapping
     suspend fun getNodeMeasurement(
         @RequestHeader("Identity") identityToken: String,
-    ): Map<String, Number> = jwtService.getIdentity(identityToken)
+    ): Map<String, Number> = readIdentityToken(identityToken)
         .let { dataService.getMeasurement(it.client, it.node).fields }
 
     @PostMapping
@@ -31,7 +35,7 @@ class MeasurementController(
         @RequestHeader("Identity") identityToken: String,
         @RequestBody measurement: Map<String, Number>,
     ) {
-        return jwtService.getIdentity(identityToken)
+        return readIdentityToken(identityToken)
             .let {
                 dataService.addMeasurement(
                     it.client,
@@ -45,4 +49,8 @@ class MeasurementController(
                 )
             }
     }
+
+    private suspend fun readIdentityToken(identityToken: String): Identity.Response = publicJwtService
+        .verify(identityToken) { claims -> UUID.fromString(claims.payload["device"] as String) }
+        .let { deviceRegistry.getIdentityFromDevice(it) }
 }

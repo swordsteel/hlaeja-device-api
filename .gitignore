@@ -39,5 +39,5 @@ out/
 ### Kotlin ###
 .kotlin
 
-### cert ###
-cert/
+#### Hlæja ###
+/cert/

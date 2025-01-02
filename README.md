@@ -16,6 +16,7 @@ Classes and endpoints, to shape and to steer, Devices and sensors, their purpose
 | spring.data.redis.host                       | &check;  | Redis host                                   |
 | spring.data.redis.port                       |          | Redis port                                   |
 | spring.data.redis.database                   | &check;  | Redis database                               |
+| spring.data.redis.password                   | &cross;  | Redis password                               |
 | cache.time-to-live                           |          | Cache time to live (minutes)                 |
 | jwt.public-key                               | &check;  | JWT public key                               |
 | device-registry.url                          | &check;  | Device Register URL                          |
